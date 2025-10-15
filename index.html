@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>گزارش مرکز تماس زودکس – ۲۲ مهر ۱۴۰۴</title>
+  <link rel="icon" href="https://zoodex.ir/favicon.ico" />
+  <style>
+    body {font-family:'Vazir',sans-serif;background:#f5f7fa;color:#333;margin:0;padding:0;}
+    header {background:#4a90e2;color:white;padding:16px 0;text-align:center;font-size:24px;}
+    section {max-width:1200px;margin:20px auto;padding:0 16px;}
+    h2 {color:#4a90e2;margin-top:40px;text-align:center;}
+    table {width:100%;border-collapse:collapse;margin:20px 0;background:white;overflow-x:auto;display:block;}
+    th,td {padding:10px;border:1px solid #ddd;text-align:center;}
+    th {background:#4a90e2;color:white;}
+    tr:nth-child(even){background:#f2f2f2;}
+    .divider {height:4px;background:linear-gradient(90deg,#4a90e2,#63b8ff);margin:40px 0;border-radius:2px;}
+    canvas {max-width:100%;height:auto;margin:20px auto;display:block;}
+    footer {text-align:center;margin:40px 0;font-size:14px;color:#666;}
+    footer a {color:#4a90e2;text-decoration:none;}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>گزارش مرکز تماس زودکس – ۲۲ مهر ۱۴۰۴</header>
+  <section>
+    <h2>خدمات مشتریان</h2>
+    <table>
+      <tr><th>شاخص</th><th>مقدار</th></tr>
+      <tr><td>کل تماس‌ها</td><td>842</td></tr>
+      <tr><td>پاسخ‌داده‌شده</td><td>808</td></tr>
+      <tr><td>از‌دست‌رفته</td><td>16</td></tr>
+      <tr><td>رهاشده</td><td>18</td></tr>
+      <tr><td>ASA (میانگین انتظار)</td><td>16.5 ثانیه</td></tr>
+      <tr><td>AHT (میانگین مکالمه)</td><td>70.6 ثانیه</td></tr>
+      <tr><td>SLA≤20s</td><td>81.3٪</td></tr>
+      <tr><td>نرخ پاسخ‌گویی</td><td>96.0٪</td></tr>
+    </table>
+    <canvas id="chartService"></canvas>
+
+    <div class="divider"></div>
+
+    <h2>مجموعه‌ها</h2>
+    <table>
+      <tr><th>شاخص</th><th>مقدار</th></tr>
+      <tr><td>کل تماس‌ها</td><td>115</td></tr>
+      <tr><td>پاسخ‌داده‌شده</td><td>111</td></tr>
+      <tr><td>از‌دست‌رفته</td><td>4</td></tr>
+      <tr><td>رهاشده</td><td>0</td></tr>
+      <tr><td>ASA (میانگین انتظار)</td><td>10.9 ثانیه</td></tr>
+      <tr><td>AHT (میانگین مکالمه)</td><td>108.9 ثانیه</td></tr>
+      <tr><td>SLA≤20s</td><td>89.2٪</td></tr>
+      <tr><td>نرخ پاسخ‌گویی</td><td>96.5٪</td></tr>
+    </table>
+    <canvas id="chartMashaghel"></canvas>
+  </section>
+
+  <footer>
+    <a href="https://github.com/digimethodx/zoodex-callcenter-report-22mehr" target="_blank">
+      مشاهده سایر گزارش‌ها در GitHub
+    </a>
+  </footer>
+
+  <script>
+    const ctxService = document.getElementById('chartService');
+    new Chart(ctxService, {
+      type: 'bar',
+      data: {
+        labels: ['08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'],
+        datasets: [{
+          label: 'تماس‌های خدمات مشتریان',
+          data: [7,27,43,31,45,62,89,49,38,30,65,67,82,84,85,38],
+          backgroundColor: 'rgba(74,144,226,0.7)',
+          borderColor: '#4a90e2',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    const ctxMash = document.getElementById('chartMashaghel');
+    new Chart(ctxMash, {
+      type: 'bar',
+      data: {
+        labels: ['08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'],
+        datasets: [{
+          label: 'تماس‌های مجموعه‌ها',
+          data: [1,5,9,1,5,10,5,6,5,8,9,12,9,10,13,7],
+          backgroundColor: 'rgba(99,184,255,0.7)',
+          borderColor: '#63b8ff',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>
