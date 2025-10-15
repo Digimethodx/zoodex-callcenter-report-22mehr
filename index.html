@@ -87,3 +87,145 @@
     h2 {
       margin: 26px 0 12px;
       font-size: 20px;
+      color: #1e293b;
+      border-right: 4px solid var(--primary);
+      padding-right: 10px;
+    }
+    body.dark h2 {
+      color: #f1f5f9;
+      border-color: #3b82f6;
+    }
+    .grid { display: grid; gap: 12px }
+    .grid.kpi { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+    @media(max-width: 900px) { .grid.kpi { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+    @media(max-width: 520px) { .grid.kpi { grid-template-columns: 1fr } }
+    .card {
+      background: var(--card);
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 8px 22px rgba(2, 6, 23, .05);
+    }
+    body.dark .card {
+      border-color: #334155;
+      box-shadow: none;
+    }
+    .kpi .title { font-size: 12px; color: var(--muted) }
+    .kpi .value { font-size: 22px; font-weight: 800; margin-top: 6px }
+    .kpi .trend { font-size: 12px; margin-top: 4px }
+    .two-col { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px }
+    @media(max-width: 900px) { .two-col { grid-template-columns: 1fr } }
+    canvas { width: 100%; height: 340px }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      color: inherit;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eef2f7;
+      text-align: center;
+    }
+    th {
+      background: #eff6ff;
+      color: #1e293b;
+    }
+    body.dark th {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+    footer {
+      margin: 26px 0 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 حالت تیره</button>
+      <h1>گزارش مدیریتی مرکز تماس زودکس</h1>
+      <p>دوره گزارش: ۲۲ مهر ۱۴۰۴ · تفکیک بخشی و ساعتی (۸ تا ۲۳)</p>
+    </header>
+
+    <div class="subhead">
+      <span class="chip">نسخه وب مدیریتی</span>
+      <span class="chip">Chart.js</span>
+      <span class="chip">RTL + واکنش‌گرا</span>
+    </div>
+
+    <h2>بخش اول: خدمات مشتریان</h2>
+    <div class="grid kpi">
+      <div class="card kpi"><div class="title">کل تماس‌ها</div><div class="value">۸۴۲</div></div>
+      <div class="card kpi"><div class="title">نرخ پاسخ‌گویی</div><div class="value">۹۶.۰٪</div><div class="trend" style="color:var(--ok)">پایدار</div></div>
+      <div class="card kpi"><div class="title">ASA (میانگین انتظار)</div><div class="value">۱۶.۵ ثانیه</div></div>
+      <div class="card kpi"><div class="title">AHT (میانگین مکالمه)</div><div class="value">۷۰.۶ ثانیه</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 style="margin-top:0;">حجم تماس‌های ساعتی</h3>
+        <canvas id="svcHourly"></canvas>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;">توزیع وضعیت تماس‌ها</h3>
+        <table>
+          <tr><th>پاسخ‌داده‌شده</th><th>از‌دست‌رفته</th><th>رهاشده</th><th>SLA≤20s</th></tr>
+          <tr><td>۸۰۸</td><td>۱۶</td><td>۱۸</td><td>۸۱.۳٪</td></tr>
+        </table>
+        <canvas id="svcStatus"></canvas>
+      </div>
+    </div>
+
+    <div style="height:4px;background:linear-gradient(90deg,var(--primary),#60a5fa);margin:26px 0;border-radius:999px"></div>
+
+    <h2>بخش دوم: مجموعه‌ها</h2>
+    <div class="grid kpi">
+      <div class="card kpi"><div class="title">کل تماس‌ها</div><div class="value">۱۱۵</div></div>
+      <div class="card kpi"><div class="title">نرخ پاسخ‌گویی</div><div class="value">۹۶.۵٪</div><div class="trend" style="color:var(--ok)">خوب</div></div>
+      <div class="card kpi"><div class="title">ASA (میانگین انتظار)</div><div class="value">۱۰.۹ ثانیه</div></div>
+      <div class="card kpi"><div class="title">AHT (میانگین مکالمه)</div><div class="value">۱۰۸.۹ ثانیه</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 style="margin-top:0;">حجم تماس‌های ساعتی</h3>
+        <canvas id="mshHourly"></canvas>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;">توزیع وضعیت تماس‌ها</h3>
+        <table>
+          <tr><th>پاسخ‌داده‌شده</th><th>از‌دست‌رفته</th><th>رهاشده</th><th>SLA≤20s</th></tr>
+          <tr><td>۱۱۱</td><td>۴</td><td>۰</td><td>۸۹.۲٪</td></tr>
+        </table>
+        <canvas id="mshStatus"></canvas>
+      </div>
+    </div>
+
+    <footer>
+      ساخت لینک عمومی: GitHub Pages · <a href="https://github.com/digimethodx/zoodex-callcenter-report-22mehr" target="_blank">ریپو گزارش</a>
+      <br>آخرین بروزرسانی: ۱۵ مهر ۱۴۰۴، ۱۰:۴۸ +۰۴
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const t = document.querySelector('.theme-toggle');
+      t.textContent = document.body.classList.contains('dark')
+        ? '☀️ حالت روشن'
+        : '🌙 حالت تیره';
+    }
+
+    // داده‌های ساعتی خدمات مشتریان
+    const svcHours = [8,
